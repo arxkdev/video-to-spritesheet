@@ -1,8 +1,8 @@
 import os from "os";
+import { readdirSync } from "fs";
 
 import type { DistinctQuestion } from "inquirer";
 import type { VideoToSpritesOptions } from "utils/videoToSprites";
-import { readdirSync } from "fs";
 
 const DEFAULT_FRAME_RATE = 25;
 const DEFAULT_THREADS = os.cpus().length;
@@ -54,12 +54,14 @@ export function getVideoToSpritesQuestions(): DistinctQuestion<VideoToSpritesOpt
       name: "frameSize",
       message: "Frame size (in pixels):",
       default: DEFAULT_FRAME_SIZE,
+      max: 1024,
     },
     {
       type: "number",
       name: "maxSheetSize",
       message: "Max sheet size (in pixels):",
       default: DEFAULT_MAX_SHEET_SIZE,
+      max: 4096,
     },
     {
       type: "confirm",

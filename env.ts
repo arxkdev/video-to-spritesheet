@@ -5,7 +5,7 @@ import { z } from "zod";
 configDotenv();
 
 const envSchema = z.object({
-  API_KEY: z.string().min(1),
+  API_KEY: z.string().min(1).optional(),
   GROUP_ID: z.string().min(1).optional(),
   USER_ID: z.string().min(1).optional(),
 });

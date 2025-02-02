@@ -17,7 +17,14 @@ export function getUploadSpritesQuestions(videoChoices: string[]): DistinctQuest
       message: "Which video sheets do you want to upload?",
       choices: videoChoices,
       default: 0,
-      when: () => videoChoices.filter(choice => choice !== "All").length > 1,
+      when: (answers) => {
+        if (answers.upload) {
+          if (!env.API_KEY) {
+            throw new Error("ROBLOX_API_KEY not set in environment. Cannot upload to Roblox.");
+          }
+        }
+        return videoChoices.filter(choice => choice !== "All").length > 1;
+      },
     },
     {
       type: "list",
