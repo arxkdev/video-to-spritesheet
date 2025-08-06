@@ -10,5 +10,13 @@ const envSchema = z.object({
   USER_ID: z.string().min(1).optional(),
 });
 
-const env = envSchema.parse(process.env);
+// Transform empty strings to undefined before parsing
+const transformedEnv = Object.fromEntries(
+  Object.entries(process.env).map(([key, value]) => [
+    key,
+    value === "" ? undefined : value
+  ])
+);
+
+const env = envSchema.parse(transformedEnv);
 export default env;

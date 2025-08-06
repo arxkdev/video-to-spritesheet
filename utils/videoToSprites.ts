@@ -62,7 +62,9 @@ export async function videoToSprites({
       );
     });
 
-    const VideoFilesToProcess = videosToProcess === "All" ? VideoFiles : [videosToProcess];
+    const VideoFilesToProcess = (videosToProcess === "All" || videosToProcess === undefined)
+      ? VideoFiles
+      : videosToProcess ? [videosToProcess] : [];
 
     if (VideoFilesToProcess.length === 0) {
       console.error(`[VideoToSprites] No video files found in "${inputDir}".`);
