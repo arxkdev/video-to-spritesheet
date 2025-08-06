@@ -18,10 +18,11 @@ export function getUploadSpritesQuestions(videoChoices: string[]): DistinctQuest
       choices: videoChoices,
       default: 0,
       when: (answers) => {
-        if (answers.upload) {
-          if (!env.API_KEY) {
-            throw new Error("ROBLOX_API_KEY not set in environment. Cannot upload to Roblox.");
-          }
+        if (!answers.upload) {
+          return false;
+        }
+        if (!env.API_KEY) {
+          throw new Error("ROBLOX_API_KEY not set in environment. Cannot upload to Roblox.");
         }
         return videoChoices.filter(choice => choice !== "All").length > 1;
       },
