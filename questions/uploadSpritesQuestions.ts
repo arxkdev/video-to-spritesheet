@@ -22,7 +22,7 @@ export function getUploadSpritesQuestions(videoChoices: string[]): DistinctQuest
           return false;
         }
         if (!env.API_KEY) {
-          throw new Error("ROBLOX_API_KEY not set in environment. Cannot upload to Roblox.");
+          throw new Error("Cannot upload to Roblox: Missing API_KEY. Please set it in your .env file.");
         }
         return videoChoices.filter(choice => choice !== "All").length > 1;
       },
