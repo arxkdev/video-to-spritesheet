@@ -1,8 +1,4 @@
-import ffmpeg from "fluent-ffmpeg";
-import ffprobePath from "@ffprobe-installer/ffprobe";
-
-// Set ffprobe path
-ffmpeg.setFfprobePath(ffprobePath.path);
+import ffmpeg from "./ffmpeg";
 
 export function getVideoFrameRate(inputVideoPath: string): Promise<number> {
   return new Promise((resolve, reject) => {

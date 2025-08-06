@@ -16,6 +16,8 @@ Once you're in the repo, place your files into the input folder called "input_vi
 .mkv
 .flv
 .wmv
+.webm
+.gif
 ```
 
 # Usage

@@ -1,15 +1,22 @@
 import sharp from "sharp";
+import path from "path";
+import ffmpeg from "./ffmpeg";
 import { ensureDir } from "fs-extra";
 import { existsSync, readdirSync, writeFileSync } from "fs";
-import path from "path";
-import ffmpeg from "fluent-ffmpeg";
-import ffmpegPath from "@ffmpeg-installer/ffmpeg";
 import { getVideoFrameRate } from "./getVideoFrameRate";
 
 import type { Sheet } from "./uploadSprites";
 
-// Set ffmpeg path
-ffmpeg.setFfmpegPath(ffmpegPath.path);
+const ALLOWED_VIDEO_EXTENSIONS = [
+  ".mp4",
+  ".mov",
+  ".avi",
+  ".mkv",
+  ".flv",
+  ".wmv",
+  ".webm",
+  ".gif"
+];
 
 export interface VideoToSpritesOptions {
   inputDir: string;
@@ -57,7 +64,7 @@ export async function videoToSprites({
     }
 
     const VideoFiles = readdirSync(inputDir).filter((file) => {
-      return [".mp4", ".mov", ".avi", ".mkv", ".flv", ".wmv"].includes(
+      return ALLOWED_VIDEO_EXTENSIONS.includes(
         path.extname(file).toLowerCase()
       );
     });
