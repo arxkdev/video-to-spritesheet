@@ -1,5 +1,5 @@
-import Axios from "axios";
 import env from "env";
+import axios from "axios";
 import FormData from "form-data";
 import { XMLParser } from "fast-xml-parser";
 import { createWriteStream, readFileSync } from "fs";
@@ -109,7 +109,7 @@ function extractRobloxImageUrl(xml: string): string | null {
 
 async function getOperation(operationPath: string): Promise<OperationResponse> {
   try {
-    const operationResponse = await Axios.get<OperationResponse>(OPERATION_URL(operationPath), {
+    const operationResponse = await axios.get<OperationResponse>(OPERATION_URL(operationPath), {
       headers: {
         "x-api-key": env.API_KEY,
       },
@@ -156,7 +156,7 @@ async function uploadAsset({ sheet, uploadType, id }: UploadAssetOptions): Promi
   );
 
   try {
-    const UploadResponse = await Axios.post<UploadResponse>(
+    const UploadResponse = await axios.post<UploadResponse>(
       UPLOAD_URL,
       BodyFormData,
       {
@@ -229,7 +229,7 @@ export async function uploadSpritesToRoblox({ sheets, uploadType, video, id }: U
     if (Asset === undefined) return;
 
     try {
-      const ImageResponse = await Axios.get<string>(GET_IMAGE_URL(Asset.assetId));
+      const ImageResponse = await axios.get<string>(GET_IMAGE_URL(Asset.assetId));
       const ImageFromDecal = extractRobloxImageUrl(ImageResponse.data);
       
       if (ImageFromDecal) {
